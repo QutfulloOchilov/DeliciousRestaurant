@@ -2,7 +2,7 @@
 
 namespace DeliciousRestaurant.IoC
 {
-    public class Class1
+    public class NativeInjectorBootStrapper
     {
     }
 }
