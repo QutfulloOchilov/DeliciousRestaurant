@@ -23,14 +23,24 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import Login from './pages/Login/LoginPage';
+import LoginPage from './pages/Login/LoginPage';
+import {DefaultTheme, Provider as PaperProvider} from 'react-native-paper';
+const theme = {
+  ...DefaultTheme,
+  roundness: 2,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: '#8bc34a',
+    accent: '#f1c40f',
+    background: '#607d8b',
+  },
+};
 
 const App = () => {
   return (
-    <Fragment>
-      <StatusBar barStyle="dark-content" />
-      <Text>Hello</Text>
-    </Fragment>
+    <PaperProvider theme={theme}>
+        <LoginPage></LoginPage>
+    </PaperProvider>
   );
 };
 
