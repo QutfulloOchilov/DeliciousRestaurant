@@ -9,12 +9,12 @@ namespace DeliciousRestaurant.Persistence.Database
 {
     public class DeliciousRestaurantContext : DbContext, IContext
     {
-        public DeliciousRestaurantContext(BasePharmacyDeliciousRestaurantContextOptionBuilder optionBuilder) : base(optionBuilder.Options)
+        public DeliciousRestaurantContext(BaseDeliciousRestaurantContextOptionBuilder optionBuilder) : base(optionBuilder.Options)
         {
             OptionBuilder = optionBuilder;
         }
 
-        public BasePharmacyDeliciousRestaurantContextOptionBuilder OptionBuilder { get; }
+        public BaseDeliciousRestaurantContextOptionBuilder OptionBuilder { get; }
 
         public override int SaveChanges()
         {

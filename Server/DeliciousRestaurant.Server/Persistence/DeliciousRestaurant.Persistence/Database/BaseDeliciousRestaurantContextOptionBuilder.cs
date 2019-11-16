@@ -2,9 +2,9 @@
 
 namespace DeliciousRestaurant.Persistence.Database
 {
-    public class BasePharmacyDeliciousRestaurantContextOptionBuilder : DbContextOptionsBuilder<DeliciousRestaurantContext>
+    public class BaseDeliciousRestaurantContextOptionBuilder : DbContextOptionsBuilder<DeliciousRestaurantContext>
     {
-        public BasePharmacyDeliciousRestaurantContextOptionBuilder(string databaseName, bool shouldCreateDatabase = true)
+        public BaseDeliciousRestaurantContextOptionBuilder(string databaseName, bool shouldCreateDatabase = true)
         {
             DatabaseName = databaseName;
             ShouldCreateDatabase = shouldCreateDatabase;
