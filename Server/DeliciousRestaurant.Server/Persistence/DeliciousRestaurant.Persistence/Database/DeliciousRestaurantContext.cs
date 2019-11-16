@@ -1,4 +1,5 @@
-﻿using DeliciousRestaurant.Domain.Entities;
+﻿using DeliciousRestaurant.Application.Interfaces;
+using DeliciousRestaurant.Domain.Entities;
 using DeliciousRestaurant.Domain.Interfaces;
 using DeliciousRestaurant.Persistence.Configurations;
 using Microsoft.EntityFrameworkCore;
