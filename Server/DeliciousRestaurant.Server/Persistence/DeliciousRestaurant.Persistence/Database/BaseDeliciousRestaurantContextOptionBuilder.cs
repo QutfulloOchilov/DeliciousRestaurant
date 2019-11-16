@@ -8,6 +8,8 @@ namespace DeliciousRestaurant.Persistence.Database
         {
             DatabaseName = databaseName;
             ShouldCreateDatabase = shouldCreateDatabase;
+            ConnectionString = $@"data source=localhost;integrated security=True;initial catalog={databaseName};MultipleActiveResultSets=true;";
+            this.UseSqlServer(ConnectionString);
         }
 
         public virtual string ConnectionString { get; }
