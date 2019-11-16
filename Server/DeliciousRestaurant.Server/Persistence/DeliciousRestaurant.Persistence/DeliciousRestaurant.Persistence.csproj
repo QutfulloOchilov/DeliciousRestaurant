@@ -9,4 +9,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="3.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Application\DeliciousRestaurant.Application\DeliciousRestaurant.Application.csproj" />
+    <ProjectReference Include="..\..\Domain\DeliciousRestaurant.Domain\DeliciousRestaurant.Domain.csproj" />
+  </ItemGroup>
 </Project>
