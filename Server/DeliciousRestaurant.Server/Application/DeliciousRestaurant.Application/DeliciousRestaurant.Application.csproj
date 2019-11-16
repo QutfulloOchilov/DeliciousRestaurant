@@ -12,6 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DeliciousRestaurant.Domain\DeliciousRestaurant.Domain.csproj" />
+    <ProjectReference Include="..\..\Domain\DeliciousRestaurant.Domain\DeliciousRestaurant.Domain.csproj" />
   </ItemGroup>
 </Project>
