@@ -5,6 +5,7 @@ using DeliciousRestaurant.Persistence.Configurations;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DeliciousRestaurant.Persistence.Database
 {
@@ -28,6 +29,11 @@ namespace DeliciousRestaurant.Persistence.Database
         }
 
         public Guid Id { get; set; }
+        public int? CommandTimeout
+        {
+            get => this.Database.GetCommandTimeout();
+            set => this.Database.SetCommandTimeout(value);
+        }
 
         /// <summary>
         /// Add new entity to context
@@ -80,7 +86,7 @@ namespace DeliciousRestaurant.Persistence.Database
         }
 
         /// <summary>
-        /// Delte entity from context
+        /// Delete entity from context
         /// </summary>
         public void Delete<T>(T entity) where T : class, IEntity
         {
@@ -123,6 +129,18 @@ namespace DeliciousRestaurant.Persistence.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(CustomerConfiguration).Assembly);
+        }
+
+        [Obsolete]
+        public int ExecuteSqlCommand(string sql, params object[] parameters)
+        {
+            return this.Database.ExecuteSqlCommand(sql, parameters);
+        }
+
+        [Obsolete]
+        public Task<int> ExecuteSqlCommandAsync(string sql, params object[] parameters)
+        {
+            return this.Database.ExecuteSqlCommandAsync(sql, parameters);
         }
     }
 }
