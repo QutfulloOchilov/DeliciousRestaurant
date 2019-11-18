@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DeliciousRestaurant.Application.Customers.Commands
+namespace DeliciousRestaurant.Application.Customers.Commands.Create
 {
     public class CustomerCreateCommand
     {

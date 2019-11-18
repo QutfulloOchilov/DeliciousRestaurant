@@ -14,4 +14,9 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Domain\DeliciousRestaurant.Domain\DeliciousRestaurant.Domain.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Customers\Queries\GetAllCustomer\" />
+    <Folder Include="Customers\Queries\GetCustomerById\" />
+  </ItemGroup>
 </Project>

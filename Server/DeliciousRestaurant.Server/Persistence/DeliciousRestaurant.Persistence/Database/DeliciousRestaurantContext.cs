@@ -77,7 +77,7 @@ namespace DeliciousRestaurant.Persistence.Database
         }
 
         /// <summary>
-        /// Update a entity
+        /// Update en entity
         /// </summary>
         public void Update<T>(Guid id, T entity) where T : class, IEntity
         {
