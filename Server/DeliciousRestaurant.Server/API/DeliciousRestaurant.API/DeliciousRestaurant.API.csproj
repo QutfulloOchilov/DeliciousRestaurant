@@ -22,4 +22,8 @@
     <PackageReference Include="System.ValueTuple" Version="4.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\IoC\DeliciousRestaurant.IoC\DeliciousRestaurant.IoC.csproj" />
+  </ItemGroup>
+
 </Project>

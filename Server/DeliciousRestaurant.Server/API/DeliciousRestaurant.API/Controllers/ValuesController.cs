@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DeliciousRestaurant.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DeliciousRestaurant.API.Controllers
@@ -10,6 +11,12 @@ namespace DeliciousRestaurant.API.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        public IContext Context { get; }
+
+        public ValuesController(IContext context)
+        {
+            Context = context;
+        }
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()

@@ -8,4 +8,9 @@
     <PackageReference Include="Autofac" Version="4.9.4" />
     <PackageReference Include="MediatR.Extensions.Autofac.DependencyInjection" Version="3.0.1" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Application\DeliciousRestaurant.Application\DeliciousRestaurant.Application.csproj" />
+    <ProjectReference Include="..\..\Persistence\DeliciousRestaurant.Persistence\DeliciousRestaurant.Persistence.csproj" />
+  </ItemGroup>
 </Project>

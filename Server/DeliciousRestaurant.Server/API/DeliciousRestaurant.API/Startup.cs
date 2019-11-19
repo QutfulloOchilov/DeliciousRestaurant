@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using DeliciousRestaurant.API.Infrastructure.AutofacModules;
+using DeliciousRestaurant.Persistence.Database;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -22,11 +26,25 @@ namespace DeliciousRestaurant.API
         }
 
         public IConfiguration Configuration { get; }
+        public IContainer Container { get; protected set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddDbContext<DeliciousRestaurantContext>(ServiceLifetime.Scoped).AddEntityFrameworkSqlServer().AddEntityFrameworkProxies();
+            // Create a Autofac container builder
+            var builder = new ContainerBuilder();
+
+            // Read service collection to Autofac
+            builder.Populate(services);
+
+            // Use and configure Autofac
+            builder.RegisterModule(new ApplicationModule(Configuration["ConnectionString"], services));
+            builder.Register((IContainer) => { return Container; }).As<IContainer>().SingleInstance();
+            // build the Autofac container
+            Container = builder.Build();
+            return new AutofacServiceProvider(Container);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
