@@ -3,7 +3,7 @@ using DeliciousRestaurant.Application.Customers.Data;
 
 namespace DeliciousRestaurant.Application.Customers.Commands
 {
-    public interface ICustomerCommand : ICommand
+    public interface ICustomerCommand : IBaseCommand
     {
         CustomerDTO CustomerDTO { get; }
     }

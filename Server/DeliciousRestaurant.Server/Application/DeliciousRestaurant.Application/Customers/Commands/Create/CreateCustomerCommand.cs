@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DeliciousRestaurant.Application.Commands
+namespace DeliciousRestaurant.Application.Customers.Commands.Create
 {
-    public class CommandHandler
+    public class CreateCustomerCommand
     {
         
     }

@@ -1,6 +1,6 @@
 ﻿namespace DeliciousRestaurant.Application.Customers.Commands.Update
 {
-    public class CustomerUpdateCommand : CustomerCommand
+    public interface IUpdateCustomerValidation : ICustomerValidation
     {
 
     }

@@ -3,7 +3,7 @@ using MediatR;
 
 namespace DeliciousRestaurant.Application.Commands
 {
-    public interface ICommand : IRequest<bool>
+    public interface IBaseCommand : IRequest<bool>
     {
         bool IsValid();
 
