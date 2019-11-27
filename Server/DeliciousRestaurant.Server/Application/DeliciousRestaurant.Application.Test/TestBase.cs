@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DeliciousRestaurant.Application.Interfaces;
-using NUnit;
+﻿using DeliciousRestaurant.Application.Interfaces;
+using Moq;
 using NUnit.Framework;
 namespace DeliciousRestaurant.Application.Test
 {
     [TestFixture]
     public class TestBase
     {
-        public IContext IContext { get; set; }
+        [SetUp]
+        public void BaseSetUp()
+        {
+            Context = new Mock<IContext>().Object;
+        }
 
-        
+        public IContext Context { get; protected set; }
     }
 }

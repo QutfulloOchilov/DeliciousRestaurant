@@ -2,6 +2,7 @@
 using FluentValidation.TestHelper;
 using Moq;
 using NUnit.Framework;
+using System;
 
 namespace DeliciousRestaurant.Application.Test.CustomerTests.Create
 {
@@ -34,6 +35,15 @@ namespace DeliciousRestaurant.Application.Test.CustomerTests.Create
             createCustomerCommandMock.Setup(p => p.IdentityUserId).Returns(string.Empty);
             _createCustomerCommand = createCustomerCommandMock.Object;
             _createCustomerValidation.ShouldHaveValidationErrorFor(c => c.IdentityUserId, _createCustomerCommand);
+        }
+
+        [Test]
+        public void ValidateIdentityUserId_NotEmpty_ShouldHaveValiationError_Test()
+        {
+            var createCustomerCommandMock = new Mock<ICreateCustomerCommand>() { CallBase = true };
+            createCustomerCommandMock.Setup(p => p.IdentityUserId).Returns(Guid.NewGuid().ToString());
+            _createCustomerCommand = createCustomerCommandMock.Object;
+            _createCustomerValidation.ShouldNotHaveValidationErrorFor(c => c.IdentityUserId, _createCustomerCommand);
         }
     }
 }
