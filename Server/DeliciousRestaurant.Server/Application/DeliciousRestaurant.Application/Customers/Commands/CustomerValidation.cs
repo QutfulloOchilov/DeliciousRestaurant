@@ -3,7 +3,8 @@ using FluentValidation;
 
 namespace DeliciousRestaurant.Application.Customers.Commands
 {
-    public abstract class CustomerValidation : BaseCommandValidation<ICustomerCommand>, ICustomerValidation
+    public abstract class CustomerValidation<TCommand> : BaseCommandValidation<TCommand>, ICustomerValidation<TCommand>
+        where TCommand : ICustomerCommand
     {
         protected void ValidateName()
         {

@@ -2,8 +2,7 @@
 
 namespace DeliciousRestaurant.Application.Customers.Commands
 {
-    public interface ICustomerValidation : IBaseCommandValidation<ICustomerCommand>
+    public interface ICustomerValidation<TCommand> : IBaseCommandValidation<TCommand> where TCommand : ICustomerCommand
     {
-
     }
 }

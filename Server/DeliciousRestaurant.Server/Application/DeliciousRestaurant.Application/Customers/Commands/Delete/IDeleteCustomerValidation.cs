@@ -1,6 +1,6 @@
 ﻿namespace DeliciousRestaurant.Application.Customers.Commands.Delete
 {
-    public interface IDeleteCustomerValidation : ICustomerValidation
+    public interface IDeleteCustomerValidation : ICustomerValidation<IDeleteCustomerCommand>
     {
 
     }
