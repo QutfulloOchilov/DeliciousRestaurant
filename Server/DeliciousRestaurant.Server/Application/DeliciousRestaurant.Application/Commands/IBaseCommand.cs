@@ -1,4 +1,5 @@
-﻿using FluentValidation.Results;
+﻿using FluentValidation;
+using FluentValidation.Results;
 using MediatR;
 
 namespace DeliciousRestaurant.Application.Commands
@@ -8,5 +9,7 @@ namespace DeliciousRestaurant.Application.Commands
         bool IsValid();
 
         ValidationResult ValidationResult { get; }
+
+        IValidator Validator { get; }
     }
 }

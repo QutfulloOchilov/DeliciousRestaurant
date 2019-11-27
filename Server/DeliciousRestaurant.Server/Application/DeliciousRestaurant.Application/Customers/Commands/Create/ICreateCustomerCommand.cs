@@ -2,6 +2,6 @@
 {
     public interface ICreateCustomerCommand : ICustomerCommand
     {
-
+        string IdentityUserId { get; set; }
     }
 }

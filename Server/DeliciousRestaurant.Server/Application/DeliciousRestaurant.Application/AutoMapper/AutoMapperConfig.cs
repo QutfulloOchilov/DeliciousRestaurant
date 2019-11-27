@@ -8,7 +8,7 @@ namespace DeliciousRestaurant.Application.AutoMapper
         {
             var mappingConfig = new MapperConfiguration(cfg =>
             {
-
+                
             });
             return mappingConfig.CreateMapper();
         }

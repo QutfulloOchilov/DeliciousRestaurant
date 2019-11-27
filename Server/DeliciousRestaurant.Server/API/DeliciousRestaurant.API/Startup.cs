@@ -15,6 +15,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+
+using DeliciousRestaurant.Application.Commands;
 
 namespace DeliciousRestaurant.API
 {
@@ -32,6 +36,8 @@ namespace DeliciousRestaurant.API
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddCustomMvc();
             services.AddDbContext<DeliciousRestaurantContext>(ServiceLifetime.Scoped).AddEntityFrameworkSqlServer().AddEntityFrameworkProxies();
             // Create a Autofac container builder
             var builder = new ContainerBuilder();
@@ -55,6 +61,7 @@ namespace DeliciousRestaurant.API
                 app.UseDeveloperExceptionPage();
             }
 
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -67,4 +74,18 @@ namespace DeliciousRestaurant.API
             });
         }
     }
+
+    static class CustomExtensionsMethods
+    {
+        public static void AddCustomMvc(this IServiceCollection services)
+        {
+            services
+                .AddMvc(option=> 
+                {
+                    option.Filters.Add<ValidationFilter>();
+                })
+                .AddFluentValidation(mvc => mvc.RegisterValidatorsFromAssemblyContaining<IBaseValidation>());
+        }
+    }
 }
+

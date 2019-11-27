@@ -2,6 +2,8 @@
 {
     public class DeleteCustomerCommand : CustomerCommand, IDeleteCustomerCommand
     {
-
+        public DeleteCustomerCommand(IDeleteCustomerValidation deleteCustomerValidation) : base(deleteCustomerValidation)
+        {
+        }
     }
 }

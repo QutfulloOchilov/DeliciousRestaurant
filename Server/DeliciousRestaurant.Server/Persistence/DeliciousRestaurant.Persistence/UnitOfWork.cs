@@ -57,5 +57,11 @@ namespace DeliciousRestaurant.Persistence
         {
             _context.UndoChanges();
         }
+
+        public async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default)
+        {
+            var result = await this.SaveChangesAsync(cancellationToken);
+            return true;
+        }
     }
 }

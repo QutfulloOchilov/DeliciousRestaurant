@@ -1,5 +1,5 @@
 ﻿using DeliciousRestaurant.Application.Commands;
-using System;
+using DeliciousRestaurant.Application.Interfaces;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -7,9 +7,11 @@ namespace DeliciousRestaurant.Application.Customers.Commands.Update
 {
     public class UpdateCustomerCommandHandler : BaseCommandHandler<IUpdateCustomerCommand>
     {
-        public override Task<bool> Handle(IUpdateCustomerCommand request, CancellationToken cancellationToken)
+        public UpdateCustomerCommandHandler(IUnitOfWork unitOfWork) : base(unitOfWork) { }
+
+        public async override Task<bool> Handle(IUpdateCustomerCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return await UnitOfWork.SaveEntitiesAsync(cancellationToken);
         }
     }
 }

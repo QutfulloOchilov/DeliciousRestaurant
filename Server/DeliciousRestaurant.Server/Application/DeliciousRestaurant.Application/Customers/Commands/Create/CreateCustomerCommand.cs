@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DeliciousRestaurant.Application.Customers.Commands.Create
+﻿namespace DeliciousRestaurant.Application.Customers.Commands.Create
 {
-    public class CreateCustomerCommand
+    public class CreateCustomerCommand : CustomerCommand, ICreateCustomerCommand
     {
-        
+        public CreateCustomerCommand(ICreateCustomerValidation validator) : base(validator) { }
+
+        public string IdentityUserId { get; set; }
     }
 }

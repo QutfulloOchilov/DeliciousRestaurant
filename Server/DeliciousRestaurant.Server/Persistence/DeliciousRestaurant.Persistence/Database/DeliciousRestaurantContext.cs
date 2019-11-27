@@ -128,6 +128,7 @@ namespace DeliciousRestaurant.Persistence.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Ignore<EntityBase>();
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(CustomerConfiguration).Assembly);
         }
 

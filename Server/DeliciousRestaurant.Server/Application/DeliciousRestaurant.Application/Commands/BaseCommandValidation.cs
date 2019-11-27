@@ -2,7 +2,15 @@
 
 namespace DeliciousRestaurant.Application.Commands
 {
-    public abstract class BaseCommandValidation<TCommand> : AbstractValidator<TCommand>, IBaseCommandValidation<TCommand> where TCommand : IBaseCommand
+    public interface IBaseValidation : IValidator
+    {
+
+    }
+
+    public abstract class BaseCommandValidation<TCommand> : AbstractValidator<TCommand>,
+        IBaseCommandValidation<TCommand>,
+        IBaseValidation where TCommand : IBaseCommand
+
     {
 
     }

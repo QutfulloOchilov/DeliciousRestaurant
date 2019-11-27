@@ -422,7 +422,7 @@ namespace DeliciousRestaurant.Persistence.Repositories
         /// <param name="entity">The entity to insert.</param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>A <see cref="Task"/> that represents the asynchronous insert operation.</returns>
-        public virtual Task<TEntity> InsertAsync(TEntity entity, CancellationToken cancellationToken = default(CancellationToken)) 
+        public virtual Task<TEntity> InsertAsync(TEntity entity, CancellationToken cancellationToken = default(CancellationToken))
         {
             throw new NotImplementedException();
 
@@ -493,11 +493,10 @@ namespace DeliciousRestaurant.Persistence.Repositories
         {
             // using a stub entity to mark for deletion
             var entity = _dbSet.Find(id);
-            if (entity != null)
-            {
-                Delete(entity);
-            }
+            if (entity == null)
+                throw new InvalidOperationException($"{typeof(TEntity).Name} not found with {id}- id");
 
+            Delete(entity);
             return true;
         }
 
