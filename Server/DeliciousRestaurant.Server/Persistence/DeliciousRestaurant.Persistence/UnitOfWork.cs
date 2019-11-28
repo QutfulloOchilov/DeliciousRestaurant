@@ -8,12 +8,12 @@ namespace DeliciousRestaurant.Persistence
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly IContext _context;
+        public IContext Context { get; }
 
         public UnitOfWork(IContext context,
             ICustomerRepository customerRepository)
         {
-            _context = context;
+            Context = context;
             CustomerRepository = customerRepository;
         }
 
@@ -21,41 +21,41 @@ namespace DeliciousRestaurant.Persistence
 
         public int? CommandTimeout
         {
-            get => _context.CommandTimeout;
-            set => _context.CommandTimeout = value;
+            get => Context.CommandTimeout;
+            set => Context.CommandTimeout = value;
         }
 
-        public virtual int SaveChanges() => _context.SaveChanges();
+        public virtual int SaveChanges() => Context.SaveChanges();
 
         public Task<int> SaveChangesAsync()
         {
-            return _context.SaveChangesAsync();
+            return Context.SaveChangesAsync();
         }
 
         public virtual Task<int> SaveChangesAsync(CancellationToken cancellationToken)
         {
-            return _context.SaveChangesAsync(cancellationToken);
+            return Context.SaveChangesAsync(cancellationToken);
         }
 
         [Obsolete]
         public virtual int ExecuteSqlCommand(string sql, params object[] parameters)
         {
-            return _context.ExecuteSqlCommand(sql, parameters);
+            return Context.ExecuteSqlCommand(sql, parameters);
         }
 
         public virtual async Task<int> ExecuteSqlCommandAsync(string sql, params object[] parameters)
         {
-            return await _context.ExecuteSqlCommandAsync(sql, parameters);
+            return await Context.ExecuteSqlCommandAsync(sql, parameters);
         }
 
         public virtual async Task<int> ExecuteSqlCommandAsync(string sql, CancellationToken cancellationToken, params object[] parameters)
         {
-            return await _context.ExecuteSqlCommandAsync(sql, cancellationToken, parameters);
+            return await Context.ExecuteSqlCommandAsync(sql, cancellationToken, parameters);
         }
 
         public virtual void Rollback()
         {
-            _context.UndoChanges();
+            Context.UndoChanges();
         }
 
         public async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default)

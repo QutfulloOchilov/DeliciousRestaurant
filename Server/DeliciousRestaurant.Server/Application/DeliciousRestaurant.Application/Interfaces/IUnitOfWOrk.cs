@@ -7,6 +7,7 @@ namespace DeliciousRestaurant.Application.Interfaces
     public interface IUnitOfWork
     {
         ICustomerRepository CustomerRepository { get; }
+        IContext Context { get; }
         int? CommandTimeout { get; set; }
         int SaveChanges();
         Task<int> SaveChangesAsync();

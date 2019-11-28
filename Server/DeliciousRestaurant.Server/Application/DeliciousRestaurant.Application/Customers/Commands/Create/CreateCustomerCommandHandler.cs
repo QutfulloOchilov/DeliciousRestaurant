@@ -1,4 +1,5 @@
-﻿using DeliciousRestaurant.Application.Commands;
+﻿using AutoMapper;
+using DeliciousRestaurant.Application.Commands;
 using DeliciousRestaurant.Application.Interfaces;
 using DeliciousRestaurant.Domain.Entities;
 using System.Threading;
@@ -8,29 +9,16 @@ namespace DeliciousRestaurant.Application.Customers.Commands.Create
 {
     public class CreateCustomerCommandHandler : BaseCommandHandler<ICreateCustomerCommand>
     {
-        public CreateCustomerCommandHandler(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
+        public CreateCustomerCommandHandler(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper) { }
 
-        }
-
-        public async override Task<bool> Handle(ICreateCustomerCommand request, CancellationToken cancellationToken)
+        public async override Task<bool> Handle(ICreateCustomerCommand request, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (!request.IsValid())
-            {
                 this.NotifyValidationErrors(request);
-            }
 
-            var customer = new Customer
-            {
-                FirstName = request.CustomerDTO.FirstName,
-                LastName = request.CustomerDTO.LastName,
-                Gender = request.CustomerDTO.Gender,
-                Image = request.CustomerDTO.Image,
-                IdentityUserId = request.IdentityUserId
-            };
-
+            var customer = Mapper.Map<Customer>(request);
             UnitOfWork.CustomerRepository.Add(customer);
-            return await UnitOfWork.SaveEntitiesAsync();
+            return await UnitOfWork.SaveEntitiesAsync(cancellationToken);
         }
     }
 }
