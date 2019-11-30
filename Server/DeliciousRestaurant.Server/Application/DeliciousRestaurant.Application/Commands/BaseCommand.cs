@@ -13,7 +13,7 @@ namespace DeliciousRestaurant.Application.Commands
         public ValidationResult ValidationResult { get; protected set; }
         public IValidator Validator { get; }
 
-        public bool IsValid()
+        public virtual bool IsValid()
         {
             ValidationResult = Validator.Validate(this);
             return ValidationResult.IsValid;
