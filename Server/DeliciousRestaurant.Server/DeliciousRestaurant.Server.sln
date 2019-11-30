@@ -11,8 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliciousRestaurant.IoC", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliciousRestaurant.Persistence", "Persistence\DeliciousRestaurant.Persistence\DeliciousRestaurant.Persistence.csproj", "{E93D4BC9-015E-4297-8942-F1C3194CCD99}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliciousRestaurant.Tests", "DeliciousRestaurant.Tests\DeliciousRestaurant.Tests.csproj", "{E047C377-4D60-4FE5-B3F2-301048114E75}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliciousRestaurant.API", "API\DeliciousRestaurant.API\DeliciousRestaurant.API.csproj", "{274E45A1-5692-46E6-BB50-5FCCB690C5C9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{7A969EF1-ACEA-4E2B-83D7-D1E0AD3746A2}"
@@ -31,15 +29,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IoC", "IoC", "{FF4C061E-FCE
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Persistence", "Persistence", "{FF4C061E-FCE7-41E8-B2FA-F6F00A643153}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliciousRestaurant.Server.Test", "API\DeliciousRestaurant.Server.Test\DeliciousRestaurant.Server.Test.csproj", "{3ABC6EE5-30C0-49C1-8182-674C11F324FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliciousRestaurant.Server.Test", "API\DeliciousRestaurant.Server.Test\DeliciousRestaurant.Server.Test.csproj", "{3ABC6EE5-30C0-49C1-8182-674C11F324FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliciousRestaurant.Domain.Test", "Domain\DeliciousRestaurant.Domain.Test\DeliciousRestaurant.Domain.Test.csproj", "{E753D06A-49AE-4AC1-979B-E9F63C3CB03A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliciousRestaurant.Domain.Test", "Domain\DeliciousRestaurant.Domain.Test\DeliciousRestaurant.Domain.Test.csproj", "{E753D06A-49AE-4AC1-979B-E9F63C3CB03A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliciousRestaurant.Infrastructure.Test", "Infrastructure\DeliciousRestaurant.Infrastructure.Test\DeliciousRestaurant.Infrastructure.Test.csproj", "{DBADE4DE-343E-48D7-B0B2-1B2F91877D0D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliciousRestaurant.Infrastructure.Test", "Infrastructure\DeliciousRestaurant.Infrastructure.Test\DeliciousRestaurant.Infrastructure.Test.csproj", "{DBADE4DE-343E-48D7-B0B2-1B2F91877D0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliciousRestaurant.IoC.Test", "IoC\DeliciousRestaurant.IoC.Test\DeliciousRestaurant.IoC.Test.csproj", "{DF1806FC-DD75-45B7-96EA-E81B9A63EE38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliciousRestaurant.IoC.Test", "IoC\DeliciousRestaurant.IoC.Test\DeliciousRestaurant.IoC.Test.csproj", "{DF1806FC-DD75-45B7-96EA-E81B9A63EE38}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliciousRestaurant.Persistence.Test", "Persistence\DeliciousRestaurant.Persistence.Test\DeliciousRestaurant.Persistence.Test.csproj", "{9F5E8D9C-5753-40AC-8990-01F7294576DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliciousRestaurant.Persistence.Test", "Persistence\DeliciousRestaurant.Persistence.Test\DeliciousRestaurant.Persistence.Test.csproj", "{9F5E8D9C-5753-40AC-8990-01F7294576DB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeliciousRestaurant.Functional.Tests", "DeliciousRestaurant.Tests\DeliciousRestaurant.Functional.Tests.csproj", "{D4B257B4-B7F9-4A7E-9A67-04F49ED34F4C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,10 +63,6 @@ Global
 		{E93D4BC9-015E-4297-8942-F1C3194CCD99}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E93D4BC9-015E-4297-8942-F1C3194CCD99}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E93D4BC9-015E-4297-8942-F1C3194CCD99}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E047C377-4D60-4FE5-B3F2-301048114E75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E047C377-4D60-4FE5-B3F2-301048114E75}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E047C377-4D60-4FE5-B3F2-301048114E75}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E047C377-4D60-4FE5-B3F2-301048114E75}.Release|Any CPU.Build.0 = Release|Any CPU
 		{274E45A1-5692-46E6-BB50-5FCCB690C5C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{274E45A1-5692-46E6-BB50-5FCCB690C5C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{274E45A1-5692-46E6-BB50-5FCCB690C5C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -99,6 +95,10 @@ Global
 		{9F5E8D9C-5753-40AC-8990-01F7294576DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F5E8D9C-5753-40AC-8990-01F7294576DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F5E8D9C-5753-40AC-8990-01F7294576DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4B257B4-B7F9-4A7E-9A67-04F49ED34F4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4B257B4-B7F9-4A7E-9A67-04F49ED34F4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4B257B4-B7F9-4A7E-9A67-04F49ED34F4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4B257B4-B7F9-4A7E-9A67-04F49ED34F4C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

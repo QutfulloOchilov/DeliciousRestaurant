@@ -1,15 +1,22 @@
-﻿using FluentValidation.Results;
-using System;
+﻿using FluentValidation;
+using FluentValidation.Results;
 
 namespace DeliciousRestaurant.Application.Commands
 {
-    public class BaseCommand : IBaseCommand
+    public abstract class BaseCommand : IBaseCommand
     {
-        public ValidationResult ValidationResult => throw new NotImplementedException();
-
-        public bool IsValid()
+        public BaseCommand(IValidator validator)
         {
-            throw new NotImplementedException();
+            Validator = validator;
+        }
+
+        public ValidationResult ValidationResult { get; protected set; }
+        public IValidator Validator { get; }
+
+        public virtual bool IsValid()
+        {
+            ValidationResult = Validator.Validate(this);
+            return ValidationResult.IsValid;
         }
     }
 }

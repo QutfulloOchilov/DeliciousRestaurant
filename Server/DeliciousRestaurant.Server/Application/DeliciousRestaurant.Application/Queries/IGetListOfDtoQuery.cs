@@ -1,5 +1,4 @@
 ﻿using DeliciousRestaurant.Application.Data;
-using MediatR;
 using System.Collections.Generic;
 
 namespace DeliciousRestaurant.Application.Queries

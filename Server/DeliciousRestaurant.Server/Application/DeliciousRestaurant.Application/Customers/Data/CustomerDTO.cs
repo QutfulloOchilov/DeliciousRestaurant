@@ -6,5 +6,7 @@ namespace DeliciousRestaurant.Application.Customers.Data
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public bool Gender { get; set; }
+        public string Image { get; set; }
     }
 }

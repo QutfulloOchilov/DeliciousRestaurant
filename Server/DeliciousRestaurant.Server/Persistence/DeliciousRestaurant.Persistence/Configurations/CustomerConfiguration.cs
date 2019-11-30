@@ -8,11 +8,12 @@ namespace DeliciousRestaurant.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<Customer> builder)
         {
+            builder.HasKey(b => b.Id);
             builder.Property(p => p.Id).HasColumnName(nameof(Customer.Id));
             builder.Property(p => p.Gender).HasColumnName(nameof(Customer.Gender));
             builder.Property(p => p.IdentityUserId).HasColumnName(nameof(Customer.IdentityUserId));
             builder.Property(p => p.Image).HasColumnName(nameof(Customer.Image));
-            builder.Property(p => p.Name).HasColumnName(nameof(Customer.Name));
+            builder.Property(p => p.FirstName).HasColumnName(nameof(Customer.FirstName));
             builder.Property(p => p.LastName).HasColumnName(nameof(Customer.LastName));
         }
     }

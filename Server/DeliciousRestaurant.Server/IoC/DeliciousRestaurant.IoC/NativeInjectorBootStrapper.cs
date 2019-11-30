@@ -1,9 +1,10 @@
 ﻿using Autofac;
+using AutoMapper;
+using DeliciousRestaurant.Application.AutoMapper;
 using DeliciousRestaurant.Application.Customers.Interfaces;
 using DeliciousRestaurant.Application.Interfaces;
 using DeliciousRestaurant.Persistence.Database;
 using DeliciousRestaurant.Persistence.Repositories;
-using System;
 
 namespace DeliciousRestaurant.IoC
 {
@@ -11,7 +12,17 @@ namespace DeliciousRestaurant.IoC
     {
         public static void RegisterServices(ContainerBuilder builder)
         {
+            RegisterMaps(builder);
             BuildRepositories(builder);
+        }
+
+        /// <summary>
+        /// Registers the AutoMapper profile 
+        /// </summary>
+        /// <param name="builder">The builder.</param>
+        private static void RegisterMaps(ContainerBuilder builder)
+        {
+            builder.Register(c => AutoMapperConfig.RegisterMappings()).As<IMapper>().InstancePerLifetimeScope();
         }
 
         private static void BuildRepositories(ContainerBuilder builder)
