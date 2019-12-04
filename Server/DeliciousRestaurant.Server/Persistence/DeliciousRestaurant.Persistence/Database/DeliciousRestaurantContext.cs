@@ -4,7 +4,9 @@ using DeliciousRestaurant.Domain.Interfaces;
 using DeliciousRestaurant.Persistence.Configurations;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace DeliciousRestaurant.Persistence.Database
@@ -142,6 +144,31 @@ namespace DeliciousRestaurant.Persistence.Database
         public Task<int> ExecuteSqlCommandAsync(string sql, params object[] parameters)
         {
             return this.Database.ExecuteSqlCommandAsync(sql, parameters);
+        }
+
+        public void RemoveRange(IEnumerable<IEntity> entities)
+        {
+            base.RemoveRange(entities);
+        }
+
+        public void UpdateRange(IEnumerable<IEntity> entities)
+        {
+            base.UpdateRange(entities);
+        }
+
+        public Task AddRangeAsync(IEnumerable<IEntity> entities, CancellationToken cancellationToken = default)
+        {
+            return base.AddRangeAsync(entities, cancellationToken);
+        }
+
+        public void AddRange(IEnumerable<IEntity> entities)
+        {
+            base.AddRange(entities);
+        }
+
+        public void Add(IEntity entity)
+        {
+            base.Add(entity);
         }
     }
 }

@@ -162,28 +162,6 @@ namespace DeliciousRestaurant.Application.Interfaces
         IQueryable<TEntity> FromSql(string sql, params object[] parameters);
 
         /// <summary>
-        /// Finds an entity with the given primary key values. If found, is attached to the context and returned. If no entity is found, then null is returned.
-        /// </summary>
-        /// <param name="keyValues">The values of the primary key for the entity to be found.</param>
-        /// <returns>The found entity or null.</returns>
-        TEntity Find(params object[] keyValues);
-
-        /// <summary>
-        /// Finds an entity with the given primary key values. If found, is attached to the context and returned. If no entity is found, then null is returned.
-        /// </summary>
-        /// <param name="keyValues">The values of the primary key for the entity to be found.</param>
-        /// <returns>A <see cref="Task{TEntity}"/> that represents the asynchronous find operation. The task result contains the found entity or null.</returns>
-        ValueTask<TEntity> FindAsync(params object[] keyValues);
-
-        /// <summary>
-        /// Finds an entity with the given primary key values. If found, is attached to the context and returned. If no entity is found, then null is returned.
-        /// </summary>
-        /// <param name="keyValues">The values of the primary key for the entity to be found.</param>
-        /// <param name="cancellationToken">A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
-        /// <returns>A <see cref="Task{TEntity}"/> that represents the asynchronous find operation. The task result contains the found entity or null.</returns>
-        ValueTask<TEntity> FindAsync(object[] keyValues, CancellationToken cancellationToken);
-
-        /// <summary>
         /// Gets all entities. This method is not recommended
         /// </summary>
         /// <returns>The <see cref="IQueryable{TEntity}"/>.</returns>
@@ -214,14 +192,6 @@ namespace DeliciousRestaurant.Application.Interfaces
         /// </summary>
         /// <param name="entities">The entities to insert.</param>
         void AddRange(IEnumerable<TEntity> entities);
-
-        /// <summary>
-        /// Inserts a new entity asynchronously.
-        /// </summary>
-        /// <param name="entity">The entity to insert.</param>
-        /// <param name="cancellationToken">A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
-        /// <returns>A <see cref="Task"/> that represents the asynchronous insert operation.</returns>
-        Task<TEntity> InsertAsync(TEntity entity, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Inserts a range of entities asynchronously.
@@ -260,7 +230,7 @@ namespace DeliciousRestaurant.Application.Interfaces
         /// Deletes the entity by the specified primary key.
         /// </summary>
         /// <param name="id">The primary key value.</param>
-        bool Delete(object id);
+        bool Delete(Guid id);
 
         /// <summary>
         /// Deletes the specified entity.

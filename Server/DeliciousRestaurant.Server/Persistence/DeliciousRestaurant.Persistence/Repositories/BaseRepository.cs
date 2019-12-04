@@ -14,9 +14,6 @@ namespace DeliciousRestaurant.Persistence.Repositories
 {
     public abstract class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : class, IEntity
     {
-        protected readonly IContext _dbContext;
-        protected readonly DbSet<TEntity> _dbSet;
-        public IUnitOfWork UnitOfWork { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Repository{TEntity}"/> class.
@@ -24,26 +21,14 @@ namespace DeliciousRestaurant.Persistence.Repositories
         /// <param name="dbContext">The database context.</param>
         public BaseRepository(IContext dbContext, IUnitOfWork unitOfWork)
         {
-            _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+            Context = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
             UnitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
-            _dbSet = (DbSet<TEntity>)_dbContext.Set<TEntity>();
+            DbSet = Context.Set<TEntity>();
         }
 
-        ///// <summary>
-        ///// Changes the table name. This require the tables in the same database.
-        ///// </summary>
-        ///// <param name="table"></param>
-        ///// <remarks>
-        ///// This only been used for supporting multiple tables in the same model. This require the tables in the same database.
-        ///// </remarks>
-        //public virtual void ChangeTable(string table)
-        //{
-        //    if (_dbContext.Model.FindEntityType(typeof(TEntity)).Relational() is RelationalEntityTypeAnnotations relational)
-        //    {
-        //        relational.TableName = table;
-        //    }
-        //}
-
+        protected IContext Context { get; }
+        protected virtual IQueryable<TEntity> DbSet { get; }
+        public IUnitOfWork UnitOfWork { get; }
 
         /// <summary>
         /// Gets all entities. This method is not recommended
@@ -52,7 +37,7 @@ namespace DeliciousRestaurant.Persistence.Repositories
         [Obsolete("This method is not recommended, please use GetPagedList or GetPagedListAsync methods")]
         public IQueryable<TEntity> GetAll()
         {
-            return _dbSet;
+            return DbSet;
         }
 
 
@@ -73,7 +58,7 @@ namespace DeliciousRestaurant.Persistence.Repositories
                                                 int pageSize = 20,
                                                 bool disableTracking = true)
         {
-            IQueryable<TEntity> query = _dbSet;
+            IQueryable<TEntity> query = DbSet;
             if (disableTracking)
             {
                 query = query.AsNoTracking();
@@ -115,7 +100,7 @@ namespace DeliciousRestaurant.Persistence.Repositories
                                                            bool disableTracking = true,
                                                            CancellationToken cancellationToken = default(CancellationToken))
         {
-            IQueryable<TEntity> query = _dbSet;
+            IQueryable<TEntity> query = DbSet;
             if (disableTracking)
             {
                 query = query.AsNoTracking();
@@ -155,7 +140,7 @@ namespace DeliciousRestaurant.Persistence.Repositories
                                                          int pageSize = 20,
                                                          bool disableTracking = true) where TResult : IEntity
         {
-            IQueryable<TEntity> query = _dbSet;
+            IQueryable<TEntity> query = DbSet;
             if (disableTracking)
             {
                 query = query.AsNoTracking();
@@ -200,7 +185,7 @@ namespace DeliciousRestaurant.Persistence.Repositories
                                                                     CancellationToken cancellationToken = default(CancellationToken))
             where TResult : IEntity
         {
-            IQueryable<TEntity> query = _dbSet;
+            IQueryable<TEntity> query = DbSet;
             if (disableTracking)
             {
                 query = query.AsNoTracking();
@@ -234,7 +219,7 @@ namespace DeliciousRestaurant.Persistence.Repositories
                                          Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
                                          bool disableTracking = true)
         {
-            IQueryable<TEntity> query = _dbSet;
+            IQueryable<TEntity> query = DbSet;
             if (disableTracking)
             {
                 query = query.AsNoTracking();
@@ -261,7 +246,7 @@ namespace DeliciousRestaurant.Persistence.Repositories
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             bool disableTracking = true)
         {
-            IQueryable<TEntity> query = _dbSet;
+            IQueryable<TEntity> query = DbSet;
             if (disableTracking)
             {
                 query = query.AsNoTracking();
@@ -297,7 +282,7 @@ namespace DeliciousRestaurant.Persistence.Repositories
                                                   Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
                                                   bool disableTracking = true)
         {
-            IQueryable<TEntity> query = _dbSet;
+            IQueryable<TEntity> query = DbSet;
             if (disableTracking)
             {
                 query = query.AsNoTracking();
@@ -324,7 +309,7 @@ namespace DeliciousRestaurant.Persistence.Repositories
                                                   Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
                                                   bool disableTracking = true)
         {
-            IQueryable<TEntity> query = _dbSet;
+            IQueryable<TEntity> query = DbSet;
             if (disableTracking)
             {
                 query = query.AsNoTracking();
@@ -357,28 +342,6 @@ namespace DeliciousRestaurant.Persistence.Repositories
         }
 
         /// <summary>
-        /// Finds an entity with the given primary key values. If found, is attached to the context and returned. If no entity is found, then null is returned.
-        /// </summary>
-        /// <param name="keyValues">The values of the primary key for the entity to be found.</param>
-        /// <returns>The found entity or null.</returns>
-        public virtual TEntity Find(params object[] keyValues) => _dbSet.Find(keyValues);
-
-        /// <summary>
-        /// Finds an entity with the given primary key values. If found, is attached to the context and returned. If no entity is found, then null is returned.
-        /// </summary>
-        /// <param name="keyValues">The values of the primary key for the entity to be found.</param>
-        /// <returns>A <see cref="Task{TEntity}" /> that represents the asynchronous insert operation.</returns>
-        public virtual ValueTask<TEntity> FindAsync(params object[] keyValues) => _dbSet.FindAsync(keyValues);
-
-        /// <summary>
-        /// Finds an entity with the given primary key values. If found, is attached to the context and returned. If no entity is found, then null is returned.
-        /// </summary>
-        /// <param name="keyValues">The values of the primary key for the entity to be found.</param>
-        /// <param name="cancellationToken">A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
-        /// <returns>A <see cref="Task{TEntity}"/> that represents the asynchronous find operation. The task result contains the found entity or null.</returns>
-        public virtual ValueTask<TEntity> FindAsync(object[] keyValues, CancellationToken cancellationToken) => _dbSet.FindAsync(keyValues, cancellationToken);
-
-        /// <summary>
         /// Gets the count based on a predicate.
         /// </summary>
         /// <param name="predicate"></param>
@@ -387,11 +350,11 @@ namespace DeliciousRestaurant.Persistence.Repositories
         {
             if (predicate == null)
             {
-                return _dbSet.Count();
+                return DbSet.Count();
             }
             else
             {
-                return _dbSet.Count(predicate);
+                return DbSet.Count(predicate);
             }
         }
 
@@ -401,39 +364,27 @@ namespace DeliciousRestaurant.Persistence.Repositories
         /// <param name="entity">The entity to insert.</param>
         public virtual void Add(TEntity entity)
         {
-            var entry = _dbSet.Add(entity);
+            Context.Add(entity);
         }
 
         /// <summary>
         /// Inserts a range of entities synchronously.
         /// </summary>
         /// <param name="entities">The entities to insert.</param>
-        public virtual void AddRange(params TEntity[] entities) => _dbSet.AddRange(entities);
+        public virtual void AddRange(params TEntity[] entities) => Context.AddRange(entities);
 
         /// <summary>
         /// Inserts a range of entities synchronously.
         /// </summary>
         /// <param name="entities">The entities to insert.</param>
-        public virtual void AddRange(IEnumerable<TEntity> entities) => _dbSet.AddRange(entities);
-
-        /// <summary>
-        /// Inserts a new entity asynchronously.
-        /// </summary>
-        /// <param name="entity">The entity to insert.</param>
-        /// <param name="cancellationToken">A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
-        /// <returns>A <see cref="Task"/> that represents the asynchronous insert operation.</returns>
-        public virtual Task<TEntity> InsertAsync(TEntity entity, CancellationToken cancellationToken = default(CancellationToken))
-        {
-            throw new NotImplementedException();
-
-        }
+        public virtual void AddRange(IEnumerable<TEntity> entities) => Context.AddRange(entities);
 
         /// <summary>
         /// Inserts a range of entities asynchronously.
         /// </summary>
         /// <param name="entities">The entities to insert.</param>
         /// <returns>A <see cref="Task" /> that represents the asynchronous insert operation.</returns>
-        public virtual Task AddRangetAsync(params TEntity[] entities) => _dbSet.AddRangeAsync(entities);
+        public virtual Task AddRangetAsync(params TEntity[] entities) => Context.AddRangeAsync(entities);
 
         /// <summary>
         /// Inserts a range of entities asynchronously.
@@ -441,7 +392,7 @@ namespace DeliciousRestaurant.Persistence.Repositories
         /// <param name="entities">The entities to insert.</param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> to observe while waiting for the task to complete.</param>
         /// <returns>A <see cref="Task"/> that represents the asynchronous insert operation.</returns>
-        public virtual Task AddRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default(CancellationToken)) => _dbSet.AddRangeAsync(entities, cancellationToken);
+        public virtual Task AddRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default(CancellationToken)) => Context.AddRangeAsync(entities, cancellationToken);
 
         /// <summary>
         /// Updates the specified entity.
@@ -449,7 +400,7 @@ namespace DeliciousRestaurant.Persistence.Repositories
         /// <param name="entity">The entity.</param>
         public virtual void Update(TEntity entity)
         {
-            _dbSet.Update(entity);
+            Context.Update(entity.Id, entity);
         }
 
         /// <summary>
@@ -458,7 +409,7 @@ namespace DeliciousRestaurant.Persistence.Repositories
         /// <param name="entity">The entity.</param>
         public virtual void UpdateAsync(TEntity entity)
         {
-            _dbSet.Update(entity);
+            Context.Update<TEntity>(entity.Id, entity);
 
         }
 
@@ -466,13 +417,13 @@ namespace DeliciousRestaurant.Persistence.Repositories
         /// Updates the specified entities.
         /// </summary>
         /// <param name="entities">The entities.</param>
-        public virtual void Update(params TEntity[] entities) => _dbSet.UpdateRange(entities);
+        public virtual void Update(params TEntity[] entities) => Context.UpdateRange(entities);
 
         /// <summary>
         /// Updates the specified entities.
         /// </summary>
         /// <param name="entities">The entities.</param>
-        public virtual void Update(IEnumerable<TEntity> entities) => _dbSet.UpdateRange(entities);
+        public virtual void Update(IEnumerable<TEntity> entities) => Context.UpdateRange(entities);
 
         /// <summary>
         /// Deletes the specified entity.
@@ -480,7 +431,7 @@ namespace DeliciousRestaurant.Persistence.Repositories
         /// <param name="entity">The entity to delete.</param>
         public virtual bool Delete(TEntity entity)
         {
-            _dbSet.Remove(entity);
+            Context.Delete(entity);
 
             return true;
         }
@@ -489,10 +440,10 @@ namespace DeliciousRestaurant.Persistence.Repositories
         /// Deletes the entity by the specified primary key.
         /// </summary>
         /// <param name="id">The primary key value.</param>
-        public virtual bool Delete(object id)
+        public virtual bool Delete(Guid id)
         {
             // using a stub entity to mark for deletion
-            var entity = _dbSet.Find(id);
+            var entity = Context.Get<TEntity>(id);
             if (entity == null)
                 throw new InvalidOperationException($"{typeof(TEntity).Name} not found with {id}- id");
 
@@ -506,7 +457,7 @@ namespace DeliciousRestaurant.Persistence.Repositories
         /// <param name="entities">The entities.</param>
         public virtual bool Delete(params TEntity[] entities)
         {
-            _dbSet.RemoveRange(entities);
+            Context.RemoveRange(entities);
 
             return true;
         }
@@ -517,7 +468,7 @@ namespace DeliciousRestaurant.Persistence.Repositories
         /// <param name="entities">The entities.</param>
         public virtual bool Delete(IEnumerable<TEntity> entities)
         {
-            _dbSet.RemoveRange(entities);
+            Context.RemoveRange(entities);
 
             return true;
         }

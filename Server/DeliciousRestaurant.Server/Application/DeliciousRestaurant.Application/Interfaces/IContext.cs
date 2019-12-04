@@ -1,5 +1,6 @@
 ﻿using DeliciousRestaurant.Domain.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,5 +20,10 @@ namespace DeliciousRestaurant.Application.Interfaces
         void UndoChanges();
         int SaveChanges();
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken));
+        void RemoveRange(IEnumerable<IEntity> entities);
+        void UpdateRange(IEnumerable<IEntity> entities);
+        Task AddRangeAsync(IEnumerable<IEntity> entities, CancellationToken cancellationToken = default(CancellationToken));
+        void AddRange(IEnumerable<IEntity> entities);
+        void Add(IEntity entity);
     }
 }
