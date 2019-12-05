@@ -6,7 +6,7 @@ namespace DeliciousRestaurant.Application.Customers.Commands
     public abstract class CustomerValidation<TCommand> : BaseCommandValidation<TCommand>, ICustomerValidation<TCommand>
         where TCommand : ICustomerCommand
     {
-        protected void ValidateName()
+        public void ValidateFirstName()
         {
             this.RuleFor(p => p.CustomerDTO.FirstName)
                 .NotNull()
@@ -14,9 +14,9 @@ namespace DeliciousRestaurant.Application.Customers.Commands
                 .WithMessage("First name can not be empty. Please set first name.");
         }
 
-        protected void ValidateLastName()
+        public void ValidateLastName()
         {
-            this.RuleFor(p => p.CustomerDTO.FirstName)
+            this.RuleFor(p => p.CustomerDTO.LastName)
                 .NotNull()
                 .NotEmpty()
                 .WithMessage("Last name can not be empty. Please set first name.");
