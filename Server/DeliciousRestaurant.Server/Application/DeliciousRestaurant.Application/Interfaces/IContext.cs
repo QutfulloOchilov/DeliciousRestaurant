@@ -13,13 +13,14 @@ namespace DeliciousRestaurant.Application.Interfaces
         IQueryable<T> Set<T>() where T : class, IEntity;
         void Update<T>(Guid id, T entity) where T : class, IEntity;
         void Delete<T>(T entity) where T : class, IEntity;
-        T Get<T>(Guid guid) where T : class, IEntity;
+        T GetById<T>(Guid id) where T : class, IEntity;
+        Task<T> GetByIdAsync<T>(Guid guid, CancellationToken cancellationToken = default) where T : class, IEntity;
         bool HasChange();
         int ExecuteSqlCommand(string sql, params object[] parameters);
         Task<int> ExecuteSqlCommandAsync(string sql, params object[] parameters);
         void UndoChanges();
         int SaveChanges();
-        Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
         void RemoveRange(IEnumerable<IEntity> entities);
         void UpdateRange(IEnumerable<IEntity> entities);
         Task AddRangeAsync(IEnumerable<IEntity> entities, CancellationToken cancellationToken = default(CancellationToken));

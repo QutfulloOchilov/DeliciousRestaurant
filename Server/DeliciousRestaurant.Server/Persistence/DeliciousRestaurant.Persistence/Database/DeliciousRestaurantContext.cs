@@ -73,9 +73,17 @@ namespace DeliciousRestaurant.Persistence.Database
         /// <summary>
         /// Get entity by guid
         /// </summary>
-        public T Get<T>(Guid guid) where T : class, IEntity
+        public T GetById<T>(Guid guid) where T : class, IEntity
         {
             return this.Find<T>(guid);
+        }
+
+        /// <summary>
+        /// Get entity by guid
+        /// </summary>
+        public Task<T> GetByIdAsync<T>(Guid guid, CancellationToken cancellationToken = default) where T : class, IEntity
+        {
+            return this.FindAsync<T>(guid, cancellationToken).AsTask();
         }
 
         /// <summary>

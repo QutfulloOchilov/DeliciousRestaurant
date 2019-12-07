@@ -14,7 +14,6 @@ namespace DeliciousRestaurant.Application.Interfaces
     /// <typeparam name="TEntity">The type of the entity.</typeparam>
     public interface IRepository<TEntity> where TEntity : class, IEntity
     {
-
         IUnitOfWork UnitOfWork { get; }
 
         /// <summary>
@@ -249,5 +248,22 @@ namespace DeliciousRestaurant.Application.Interfaces
         /// </summary>
         /// <param name="entities">The entities.</param>
         bool Delete(IEnumerable<TEntity> entities);
+
+        /// <summary>
+        /// Get the specified entity by id.
+        /// </summary>
+        /// <param name="id">The entity id</param>
+        /// <returns>The <see cref="{TEntity}"/>.</returns>
+        TEntity GetById(Guid id);
+
+        /// <summary>
+        /// Get the specified entity by id.
+        /// </summary>
+        /// <param name="id">The entity is</param>
+        /// <param name="cancellationToken">
+        ///     A <see cref="CancellationToken" /> to observe while waiting for the task to complete.
+        /// </param>
+        /// <returns>The <see cref="{TEntity}"/>.</returns>
+        Task<TEntity> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
     }
 }

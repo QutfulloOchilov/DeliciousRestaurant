@@ -7,5 +7,6 @@
         public string LastName { get; set; }
         public string Image { get; set; }
         public bool Gender { get; set; }
+        public bool IsActive { get; set; }
     }
 }
