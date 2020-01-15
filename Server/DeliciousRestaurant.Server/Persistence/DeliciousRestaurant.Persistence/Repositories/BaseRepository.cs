@@ -443,7 +443,7 @@ namespace DeliciousRestaurant.Persistence.Repositories
         public virtual bool Delete(Guid id)
         {
             // using a stub entity to mark for deletion
-            var entity = Context.Get<TEntity>(id);
+            var entity = Context.GetById<TEntity>(id);
             if (entity == null)
                 throw new InvalidOperationException($"{typeof(TEntity).Name} not found with {id}- id");
 
@@ -471,6 +471,26 @@ namespace DeliciousRestaurant.Persistence.Repositories
             Context.RemoveRange(entities);
 
             return true;
+        }
+
+        /// <summary>
+        /// Get the specified entity by id.
+        /// </summary>
+        /// <param name="id">The entity id</param>
+        /// <returns>The <see cref="{TEntity}"/>.</returns>
+        public TEntity GetById(Guid id)
+        {
+            return Context.GetById<TEntity>(id);
+        }
+
+        /// <summary>
+        /// Get the specified entity by id.
+        /// </summary>
+        /// <param name="id">The entity id</param>
+        /// <returns>The <see cref="{TEntity}"/>.</returns>
+        public Task<TEntity> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
+        {
+            return Context.GetByIdAsync<TEntity>(id, cancellationToken);
         }
     }
 }
